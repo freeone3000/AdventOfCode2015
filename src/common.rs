@@ -13,12 +13,12 @@ pub mod common {
         let mut s = String::new();
         match file.read_to_string(&mut s) {
             Err(why) => panic!("Error reading file: {}", why),
-            Ok(_) => return callback(&s)
-        };
+            Ok(_) => callback(&s)
+        }
     }
 
     #[allow(dead_code)]
-    pub fn read_file_linewise<T>(filename: &str, callback: &dyn Fn(&String) -> T) -> Vec<T> {
+    pub fn read_file_linewise<T>(filename: &str, callback: &dyn Fn(&str) -> T) -> Vec<T> {
         let mut mapped = Vec::new();
         let file = match File::open(&filename) {
             Err(why) => panic!("Error opening file: {}", why),
@@ -34,13 +34,13 @@ pub mod common {
                     if bytes_read == 0 {
                         break;
                     }
-                    let value = callback(&line);
+                    let value = callback(line.trim_end());
                     mapped.push(value);
                     line.clear();
                 },
                 Err(why) => panic!("Error reading line: {}", why)
             }
         };
-        return mapped;
+        mapped
     }
 }

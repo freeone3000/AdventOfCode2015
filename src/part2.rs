@@ -53,7 +53,7 @@ fn calculate_ribbon(dims: &PresentDimensions) -> i32 {
     return min(perim1, min(perim2, perim3)) + bow;
 }
 
-fn process_present(line: &String) -> PresentDimensions {
+fn process_present(line: &str) -> PresentDimensions {
     let dims: PresentDimensions = line.parse().unwrap();
     return dims;
 }
