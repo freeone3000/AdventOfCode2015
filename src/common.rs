@@ -4,7 +4,7 @@ pub mod common {
     use std::path::Path;
 
     #[allow(dead_code)]
-    pub fn read_file(filename: &str, callback: &dyn Fn(&String) -> i32) -> i32 {
+    pub fn read_file<T>(filename: &str, callback: &dyn Fn(&String) -> T) -> T {
         let path = Path::new(filename);
         let mut file = match File::open(&path) {
             Err(why) => panic!("Error opening file: {}", why),
@@ -18,7 +18,7 @@ pub mod common {
     }
 
     #[allow(dead_code)]
-    pub fn read_file_linewise(filename: &str, callback: &dyn Fn(&String) -> i32) -> Vec<i32> {
+    pub fn read_file_linewise<T>(filename: &str, callback: &dyn Fn(&String) -> T) -> Vec<T> {
         let mut mapped = Vec::new();
         let file = match File::open(&filename) {
             Err(why) => panic!("Error opening file: {}", why),
