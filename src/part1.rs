@@ -1,7 +1,7 @@
 #[path="common.rs"]
 mod common;
 
-fn process(s: String) -> i32 {
+fn process(s: &String) -> i32 {
     let mut floor = 0;
     let mut position = 1; // by puzzle spec
     let mut printed = false;
